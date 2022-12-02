@@ -1,27 +1,75 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from 'react';
+import { View, Text , Image, ImageProps} from 'react-native';
+import { ImageSourcePropType } from 'react-native';
 
-export default function App() {
+
+import { Home } from './pages/Home';
+import { Profile } from './pages/Profile';
+import { Other } from './pages/Other';
+
+import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
+import { TouchableOpacity } from 'react-native';
+
+
+const Drawer = createDrawerNavigator();
+
+const CustomDrawer = (props: any) => {
   return (
-    <View style={styles.container}>
-      <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consectetur massa a sapien congue, 
-        sit amet viverra arcu maximus. In finibus justo neque, sit amet tristique enim ullamcorper id. 
-        Suspendisse at aliquet mi. Nam neque magna, sagittis vitae mauris ac, rhoncus volutpat metus. 
-        Integer aliquam maximus ex et ultrices. Vestibulum hendrerit rutrum risus, placerat tempor risus. 
-        Donec elementum nisl iaculis nulla tincidunt molestie. Proin ut orci a ligula semper vulputate quis
-         nec erat. Nam ut augue dignissim, pellentesque arcu ut, vestibulum purus. Curabitur sed varius enim. 
-         Sed ante ipsum, venenatis at odio a, interdum venenatis metus. Sed iaculis placerat neque, et 
-         molestie neque pulvinar ut. Nullam rutrum velit eget ex dictum mollis. Aenean feugiat fermentum semper.</Text>
-      <StatusBar style="auto" />
+    <View style={{flex: 1}}>
+
+      <DrawerContentScrollView {...props}>
+        <View style={{
+            flexDirection: 'row', 
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            padding: 20,
+            backgroundColor: '#f6f6f6'
+          }}
+        >
+          <View>
+            <Text style={{ fontWeight: '800', fontSize: 18 }}>John Doe A.</Text>
+            <Text>example@email.com</Text>
+          </View>
+          <Image 
+            source={require('./assets/Profile.png')}
+            style={{
+              width: 80, 
+              height: 80, 
+              borderRadius: 15,
+              marginRight: 5,
+              marginBottom: 5
+            }}
+          />
+        </View>
+        <DrawerItemList {...props}/>
+      </DrawerContentScrollView>
+      <TouchableOpacity style={{ 
+        position: 'absolute',
+        right: 0, 
+        left: 0,
+        bottom: 20,
+        backgroundColor: '#f6f6f6',
+        padding: 10
+        }}>
+        <Text style={{fontSize: 16, fontWeight: '800'}}> 🚪 Salir</Text>
+      </TouchableOpacity>
     </View>
+  );
+};
+
+const DrawerNavigator = () => {
+  return(
+    <Drawer.Navigator drawerContent={(props) => <CustomDrawer {...props}/> }>
+      <Drawer.Screen component={Home} name=' 🏠 Inicio'/>
+      <Drawer.Screen component={Profile} name=' 👤 Perfil'/>
+      <Drawer.Screen component={Other} name=' 🐣 Otros'/>
+    </Drawer.Navigator>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default function App() {
+  return <NavigationContainer>
+    <DrawerNavigator/>
+  </NavigationContainer>
+}
