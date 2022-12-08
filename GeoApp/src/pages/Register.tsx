@@ -1,19 +1,15 @@
-/*Login View*/
-import * as React from "react";
+/*Register View*/
+import React from "react";
 import { SafeAreaView, Text, TextInput, View, Image, TouchableOpacity} from "react-native";
 import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 
-interface Navigation {
-  navigate(destination: string): void;
-}
-
-const LoginScreen = ({navigation}: {navigation: Navigation}) => {
+const RegisterScreen = ({navigation}: any) => {
   return (
     <SafeAreaView style={{flex: 1, justifyContent: 'center', backgroundColor: '#fff'}}>
       <View style={{paddingHorizontal: 25}}>
         <View style={{alignItems: 'center', paddingBottom: 20}}>
-          <Image source={require('../img/Login.png')} style={{height: 240, width: 240}}/>
+          <Image source={require('../img/Register.png')} style={{height: 240, width: 240}}/>
         </View>
         
         <View style={{alignItems: 'center'}}>
@@ -23,7 +19,7 @@ const LoginScreen = ({navigation}: {navigation: Navigation}) => {
             color: '#333', 
             marginBottom: 25
           }}>
-            Iniciar Sesión
+            Crear Cuenta
           </Text>
         </View>
         
@@ -69,7 +65,7 @@ const LoginScreen = ({navigation}: {navigation: Navigation}) => {
                 fontSize: 14,
                 color: '#fff'
               }}>
-                Ingresar
+                Registrarse
               </Text>
           </TouchableOpacity>
         </View>
@@ -79,14 +75,14 @@ const LoginScreen = ({navigation}: {navigation: Navigation}) => {
           justifyContent: 'center',
           marginTop: 10
         }}>
-          <Text>¿No tienes una cuenta? </Text>
-          <TouchableOpacity onPress={() => {navigation.navigate('Registro')}}>
+          <Text>¿Ya tienes una cuenta? </Text>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
             <Text style={{
               fontWeight: '700',
               fontSize: 14,
               color: '#4A7F4A'
             }}>
-              Registrate
+              Inicia Sesión
             </Text>
           </TouchableOpacity>
         </View>
@@ -96,4 +92,4 @@ const LoginScreen = ({navigation}: {navigation: Navigation}) => {
   )
 }
 
-export default LoginScreen;
+export default RegisterScreen;

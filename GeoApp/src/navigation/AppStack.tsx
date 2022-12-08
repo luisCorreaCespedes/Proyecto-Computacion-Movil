@@ -28,7 +28,7 @@ const AppStack = () => {
         },
       }}>
       <Drawer.Screen
-        name="Mapa!"
+        name="Mapa"
         component={Home}
         options={{
           drawerIcon: ({color}) => (
