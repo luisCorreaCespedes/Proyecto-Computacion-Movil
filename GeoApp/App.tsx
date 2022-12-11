@@ -11,7 +11,7 @@ import AuthStack from './src/navigation/RouteStack';
 function App() {
   return (
     <NavigationContainer>
-      <AuthStack/>
+      <AuthStack />
     </NavigationContainer>
   );
 }

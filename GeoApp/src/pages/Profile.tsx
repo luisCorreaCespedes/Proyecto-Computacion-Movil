@@ -1,5 +1,6 @@
 /*Profile View*/
-import { Text, StyleSheet, View } from "react-native";
+import { useEffect } from "react";
+import { Text, StyleSheet, View, BackHandler } from "react-native";
 
 const Profile = () => {
   return (

@@ -17,7 +17,7 @@ const RouterStack = () => {
           <Stack.Screen name='Registro' component={Register}/>
           <Stack.Screen name='Mapa' component={DrawerStack}/>
           <Stack.Screen name='Perfil' component={DrawerStack}/>
-          <Stack.Screen name='Otros' component={DrawerStack}/>
+          <Stack.Screen name='Acerca' component={DrawerStack}/>
         </Stack.Navigator>
     )
 }

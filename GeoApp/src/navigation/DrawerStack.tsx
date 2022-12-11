@@ -7,7 +7,7 @@ import { Ionicons } from '@expo/vector-icons';
 /*Pages (Views)*/
 import  Home  from '../pages/Home';
 import  Profile  from '../pages/Profile';
-import  Other from '../pages/Other';
+import  About from '../pages/About';
 
 /*Pages Stack*/
 const Drawer = createDrawerNavigator();
@@ -45,8 +45,8 @@ const DrawerStack = () => {
         }}
       />
       <Drawer.Screen
-        name="Otros"
-        component={Other}
+        name="Acerca de"
+        component={About}
         options={{
           drawerIcon: ({color}) => (
             <Ionicons name="leaf-outline" size={22} color={color} />

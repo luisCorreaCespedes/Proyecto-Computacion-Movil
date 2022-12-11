@@ -1,6 +1,6 @@
 /*Register View*/
 import React, {useEffect, useState} from "react";
-import { SafeAreaView, Text, TextInput, View, Image, TouchableOpacity, ScrollView, Alert} from "react-native";
+import { SafeAreaView, Text, TextInput, View, Image, TouchableOpacity, ScrollView, Alert, BackHandler} from "react-native";
 import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import InputFields from "../components/InputFields";
@@ -15,11 +15,28 @@ const RegisterScreen = ({navigation}: {navigation: Navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', backPressed);
+  }, []);
+
+  const backPressed = () => {
+    Alert.alert(
+      'GeoAlert',
+      '¿Deseas salir de la aplicación?',
+      [
+        {text: 'Volver', onPress: () => console.log('Cancelar'), style: 'cancel'},
+        {text: 'Salir', onPress: () => BackHandler.exitApp()},
+      ],
+      { cancelable: false });
+      return true;
+  }
+
   const handleRegister = () => {
     auth
       .createUserWithEmailAndPassword(email, password)
       .then(userCredentials => {
-        Alert.alert('Registro', 'Registrado correctamente', [{text: 'OK'}])
+        Alert.alert('Registro', 'Registrado correctamente', 
+        [{text: 'Vale', onPress: () => navigation.navigate('Mapa')}])
       })
       .catch(error => 
         Alert.alert(error.message)
@@ -30,7 +47,7 @@ const RegisterScreen = ({navigation}: {navigation: Navigation}) => {
     <SafeAreaView style={{flex: 1, justifyContent: 'center', backgroundColor: '#fff'}}>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        style={{paddingTop: 60}}>
+        style={{paddingTop: 80}}>
         <View style={{paddingHorizontal: 25}}>
           <View style={{alignItems: 'center', paddingBottom: 20}}>
             <Image source={require('../img/Register.png')} style={{height: 240, width: 240}}/>
@@ -47,20 +64,7 @@ const RegisterScreen = ({navigation}: {navigation: Navigation}) => {
             </Text>
           </View>
 
-          <View style={{
-            flexDirection: 'row', 
-            alignItems: 'center', 
-            borderBottomColor: '#ccc', 
-            borderBottomWidth: 1, 
-            paddingBottom: 8, 
-            marginBottom: 15
-          }}>
-            <Ionicons name='person-outline' size={20} color='#666'/>
-            <TextInput 
-              placeholder="Nombre de Usuario" 
-              style={{marginLeft: 10, flex: 1, paddingVertical: 0}}
-            />
-          </View>
+          
 
           <View style={{
             flexDirection: 'row', 
@@ -145,3 +149,22 @@ const RegisterScreen = ({navigation}: {navigation: Navigation}) => {
 }
 
 export default RegisterScreen;
+
+/*
+
+<View style={{
+            flexDirection: 'row', 
+            alignItems: 'center', 
+            borderBottomColor: '#ccc', 
+            borderBottomWidth: 1, 
+            paddingBottom: 8, 
+            marginBottom: 15
+          }}>
+            <Ionicons name='person-outline' size={20} color='#666'/>
+            <TextInput 
+              placeholder="Nombre de Usuario" 
+              style={{marginLeft: 10, flex: 1, paddingVertical: 0}}
+            />
+          </View>
+
+*/

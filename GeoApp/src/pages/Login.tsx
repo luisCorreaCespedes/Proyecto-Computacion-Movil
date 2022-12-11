@@ -1,6 +1,6 @@
 /*Login View*/
 import React, {useEffect, useState} from "react";
-import { SafeAreaView, ScrollView, Text, TextInput, View, Image, TouchableOpacity, Alert} from "react-native";
+import { SafeAreaView, ScrollView, Text, TextInput, View, Image, TouchableOpacity, Alert, BackHandler} from "react-native";
 import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { auth } from "../../firebaseAuth";
@@ -9,24 +9,34 @@ interface Navigation {
   navigate(destination: string): void;
 }
 
+let val = false;
+
 const LoginScreen = ({navigation}: {navigation: Navigation}) => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   useEffect(() => {
-    const valid = auth.onAuthStateChanged(user => {
-      if (user) {
-        navigation.navigate('Mapa');
-      }
-    })
-    return valid;
-  })
+    BackHandler.addEventListener('hardwareBackPress', backPressed);
+  }, []);
+
+  const backPressed = () => {
+    Alert.alert(
+      'GeoAlert',
+      '¿Deseas salir de la aplicación?',
+      [
+        {text: 'Volver', onPress: () => console.log('Cancelar'), style: 'cancel'},
+        {text: 'Salir', onPress: () => BackHandler.exitApp()},
+      ],
+      { cancelable: false });
+      return val = true;
+  }
 
   const handleLogin = () => {
     auth
       .signInWithEmailAndPassword(email, password)
       .then(userCredentials => {
+        navigation.navigate('Mapa');
       })
       .catch(error => 
         Alert.alert('Inicio de Sesión', 'Las credenciales no son válidas. Intenta nuevamente.', [{text: 'Volver'}])

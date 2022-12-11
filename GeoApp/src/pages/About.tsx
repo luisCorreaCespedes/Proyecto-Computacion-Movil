@@ -1,7 +1,8 @@
 /*Other View*/
-import { Text, StyleSheet, View } from "react-native";
+import { useEffect } from "react";
+import { Text, StyleSheet, View, BackHandler } from "react-native";
 
-const Other = () => {
+const About = () => {
   return (
     <View style={styles.container}>
       <Text>Vista de prueba para agregar otra cosa... creo</Text>
@@ -18,4 +19,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Other;
+export default About;
