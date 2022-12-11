@@ -3,7 +3,6 @@ import React, {useEffect, useState} from "react";
 import { SafeAreaView, Text, TextInput, View, Image, TouchableOpacity, ScrollView, Alert, BackHandler} from "react-native";
 import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
-import InputFields from "../components/InputFields";
 import { auth } from "../../firebaseAuth";
 
 interface Navigation {
@@ -39,7 +38,7 @@ const RegisterScreen = ({navigation}: {navigation: Navigation}) => {
         [{text: 'Vale', onPress: () => navigation.navigate('Mapa')}])
       })
       .catch(error => 
-        Alert.alert(error.message)
+        Alert.alert('Registro', 'Los datos ingresados no son válidos. Intente nuevamente.', [{text: 'Volver'}])
         )
   }
 
@@ -94,7 +93,7 @@ const RegisterScreen = ({navigation}: {navigation: Navigation}) => {
           }}>
             <Ionicons name='ios-lock-closed-outline' size={20} color='#666'/>
             <TextInput 
-              placeholder="Contraseña" 
+              placeholder="Contraseña (mínimo 6 carácteres)" 
               style={{marginLeft: 10, flex: 1, paddingVertical: 0}} 
               secureTextEntry={true}
               value={password}
