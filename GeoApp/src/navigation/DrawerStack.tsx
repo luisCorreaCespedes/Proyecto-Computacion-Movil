@@ -1,19 +1,18 @@
 /*Imports*/
 import React from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import CustomDrawer from '../components/CustomDrawer';
 import { Ionicons } from '@expo/vector-icons';
 
 /*Pages (Views)*/
-import { Home } from '../pages/Home';
-import { Profile } from '../pages/Profile';
-import { Other } from '../pages/Other';
+import  Home  from '../pages/Home';
+import  Profile  from '../pages/Profile';
+import  Other from '../pages/Other';
 
 /*Pages Stack*/
 const Drawer = createDrawerNavigator();
 
-const AppStack = () => {
+const DrawerStack = () => {
   return (
     <Drawer.Navigator
       drawerContent={props => <CustomDrawer {...props} />}
@@ -28,7 +27,7 @@ const AppStack = () => {
         },
       }}>
       <Drawer.Screen
-        name="Mapa"
+        name="Inicio"
         component={Home}
         options={{
           drawerIcon: ({color}) => (
@@ -57,5 +56,4 @@ const AppStack = () => {
     </Drawer.Navigator>
   );
 };
-
-export default AppStack;
+export default DrawerStack;

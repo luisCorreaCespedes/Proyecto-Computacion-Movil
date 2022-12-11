@@ -2,12 +2,15 @@
 import React from 'react';
 import { View, Text, ImageBackground, Image, TouchableOpacity } from 'react-native';
 import { DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
+import { useNavigation } from '@react-navigation/native';
 
 /*Icons*/
 import { Ionicons } from '@expo/vector-icons';
+import { auth } from '../../firebaseAuth';
 
 /*Custom Side Bar*/
 const CustomDrawer = (props: any) => {
+  const navigation = useNavigation();
   return (
     <View style={{flex: 1}}>
       <DrawerContentScrollView {...props} contentContainerStyle={{backgroundColor: '#f4f4f4'}}>
@@ -27,7 +30,12 @@ const CustomDrawer = (props: any) => {
         </View>
       </DrawerContentScrollView>
       <View style={{paddingLeft: 20, paddingBottom: 5, paddingTop: 5, borderTopWidth: 1, borderTopColor: '#ccc'}}>
-        <TouchableOpacity onPress={() => {}} style={{paddingVertical: 15}}>
+        <TouchableOpacity 
+          onPress={() => {
+            auth.signOut(),
+            props.navigation.navigate('Ingreso')
+          }}
+          style={{paddingVertical: 15}}>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <Ionicons name="exit-outline" size={22} />
             <Text style={{ fontSize: 15, marginLeft: 5}}>

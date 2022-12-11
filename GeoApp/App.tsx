@@ -1,15 +1,17 @@
 /*Imports*/
-import * as React from 'react';
+import React, {useContext, useEffect} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import AuthStack from './src/navigation/AuthStack';
-import AppStack from './src/navigation/AppStack';
+
+
+//Cambiar AuthStack por AppStack para ver el Home y lo demás
+import AuthStack from './src/navigation/RouteStack';
+
 
 /*App*/
 function App() {
   return (
     <NavigationContainer>
-      <AuthStack />
-      
+      <AuthStack/>
     </NavigationContainer>
   );
 }

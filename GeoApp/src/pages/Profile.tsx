@@ -1,7 +1,7 @@
 /*Profile View*/
 import { Text, StyleSheet, View } from "react-native";
 
-export function Profile() {
+const Profile = () => {
   return (
     <View style={styles.container}>
       <Text>Acá va el perfil del usuario!</Text>
@@ -17,3 +17,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
 });
+
+export default Profile;

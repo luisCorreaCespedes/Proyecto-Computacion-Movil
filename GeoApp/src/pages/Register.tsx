@@ -1,16 +1,36 @@
 /*Register View*/
-import React from "react";
-import { SafeAreaView, Text, TextInput, View, Image, TouchableOpacity, ScrollView} from "react-native";
+import React, {useEffect, useState} from "react";
+import { SafeAreaView, Text, TextInput, View, Image, TouchableOpacity, ScrollView, Alert} from "react-native";
 import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import InputFields from "../components/InputFields";
+import { auth } from "../../firebaseAuth";
 
-const RegisterScreen = ({navigation}: any) => {
+interface Navigation {
+  navigate(destination: string): void;
+}
+
+const RegisterScreen = ({navigation}: {navigation: Navigation}) => {
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleRegister = () => {
+    auth
+      .createUserWithEmailAndPassword(email, password)
+      .then(userCredentials => {
+        Alert.alert('Registro', 'Registrado correctamente', [{text: 'OK'}])
+      })
+      .catch(error => 
+        Alert.alert(error.message)
+        )
+  }
+
   return (
     <SafeAreaView style={{flex: 1, justifyContent: 'center', backgroundColor: '#fff'}}>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        style={{paddingTop: 40}}>
+        style={{paddingTop: 60}}>
         <View style={{paddingHorizontal: 25}}>
           <View style={{alignItems: 'center', paddingBottom: 20}}>
             <Image source={require('../img/Register.png')} style={{height: 240, width: 240}}/>
@@ -27,17 +47,60 @@ const RegisterScreen = ({navigation}: any) => {
             </Text>
           </View>
 
-          <InputFields label={'Nombre de Usuario'} icon={ <Ionicons name='person-outline' size={20} color='#666'/> } />
+          <View style={{
+            flexDirection: 'row', 
+            alignItems: 'center', 
+            borderBottomColor: '#ccc', 
+            borderBottomWidth: 1, 
+            paddingBottom: 8, 
+            marginBottom: 15
+          }}>
+            <Ionicons name='person-outline' size={20} color='#666'/>
+            <TextInput 
+              placeholder="Nombre de Usuario" 
+              style={{marginLeft: 10, flex: 1, paddingVertical: 0}}
+            />
+          </View>
 
-          <InputFields label={'Correo Eletrónico'} icon={ <MaterialIcons name='alternate-email' size={20} color='#666'/>} keyboardType='email-address'/>
-          
-          <InputFields label={'Contraseña'} icon={ <Ionicons name='ios-lock-closed-outline' size={20} color='#666'/>} inputType='password'/>
+          <View style={{
+            flexDirection: 'row', 
+            alignItems: 'center', 
+            borderBottomColor: '#ccc', 
+            borderBottomWidth: 1, 
+            paddingBottom: 8, 
+            marginBottom: 15
+          }}>
+            <MaterialIcons name='alternate-email' size={20} color='#666'/>
+            <TextInput 
+              placeholder="Correo Electrónico" 
+              style={{marginLeft: 10, flex: 1, paddingVertical: 0}} 
+              keyboardType='email-address'
+              value={email}
+              onChangeText={text => setEmail(text)}
+            />
+          </View>
 
-          <InputFields label={'Confirma la Contraseña'} icon={ <Ionicons name='ios-lock-closed-outline' size={20} color='#666'/>} inputType='password'/>
+          <View style={{
+            flexDirection: 'row', 
+            alignItems: 'center', 
+            borderBottomColor: '#ccc', 
+            borderBottomWidth: 1, 
+            paddingBottom: 8, 
+            marginBottom: 15
+          }}>
+            <Ionicons name='ios-lock-closed-outline' size={20} color='#666'/>
+            <TextInput 
+              placeholder="Contraseña" 
+              style={{marginLeft: 10, flex: 1, paddingVertical: 0}} 
+              secureTextEntry={true}
+              value={password}
+              onChangeText={text => setPassword(text)}
+              />
+          </View>
           
           <View style={{alignItems: 'center'}}>
             <TouchableOpacity 
-              onPress={() => {}}
+              onPress={handleRegister}
               style={{
                 backgroundColor: '#7CBE7C',
                 padding: 8,
@@ -64,7 +127,7 @@ const RegisterScreen = ({navigation}: any) => {
             marginTop: 10
           }}>
             <Text>¿Ya tienes una cuenta? </Text>
-            <TouchableOpacity onPress={() => navigation.goBack()}>
+            <TouchableOpacity onPress={() => {navigation.navigate('Ingreso')}}>
               <Text style={{
                 fontWeight: '700',
                 fontSize: 14,

@@ -1,7 +1,7 @@
 /*Home View*/
 import { Text, StyleSheet, View } from "react-native";
 
-export function Home() {
+const Home = () => {
   return (
     <View style={styles.container}>
       <Text>Aquí va el mapa!</Text>
@@ -17,3 +17,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
 });
+
+export default Home;
