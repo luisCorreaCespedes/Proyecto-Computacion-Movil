@@ -62,9 +62,7 @@ const RegisterScreen = ({navigation}: {navigation: Navigation}) => {
               Crear Cuenta
             </Text>
           </View>
-
           
-
           <View style={{
             flexDirection: 'row', 
             alignItems: 'center', 
