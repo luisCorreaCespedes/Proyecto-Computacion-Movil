@@ -6,12 +6,12 @@ import 'firebase/compat/auth';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCY8DsZmr4EQtX3-gh6RHcpUA3xag_DU3o",
-  authDomain: "geoappauth.firebaseapp.com",
-  projectId: "geoappauth",
-  storageBucket: "geoappauth.appspot.com",
-  messagingSenderId: "132186045984",
-  appId: "1:132186045984:web:8ce0843b5e1ae8e2c70645"
+  apiKey: "AIzaSyCQtY3zzKlYrs3iBvZxEeFaOcJInz0m4Yk",
+  authDomain: "geoalertdata.firebaseapp.com",
+  projectId: "geoalertdata",
+  storageBucket: "geoalertdata.appspot.com",
+  messagingSenderId: "967198115211",
+  appId: "1:967198115211:web:4cb42a495a5c62b5359b8e"
 };
 
 // Initialize Firebase
