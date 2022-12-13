@@ -16,21 +16,28 @@ const CustomDrawer = (props: any) => {
     <View style={{flex: 1}}>
       <DrawerContentScrollView {...props} contentContainerStyle={{backgroundColor: '#f4f4f4'}}>
         <ImageBackground source={require('../img/menuBg.jpg')} style={{padding: 20}}>
-          {
-            (auth.currentUser?.photoURL !== null) ? 
-            <Image source={{uri: auth.currentUser?.photoURL}} style={{height: 80, width: 80, borderRadius: 15, marginBottom: 10}}/> :
-            <Image source={require('../img/Profile.png')} style={{height: 80, width: 80, borderRadius: 15, marginBottom: 10}}/>
-          }
-          <Text style={{ color: '#000', fontWeight: '700', fontSize: 18, marginBottom: 5}}>
+
+         <View style={{flexDirection: 'row'}}>
+          <View>
             {
-              (auth.currentUser?.displayName !== null) ? auth.currentUser?.displayName : 'Nuevo Usuario'
+              (auth.currentUser?.photoURL !== null) ? 
+              <Image source={{uri: auth.currentUser?.photoURL}} style={{height: 80, width: 80, borderRadius: 15}}/> :
+              <Image source={require('../img/Profile1.png')} style={{height: 80, width: 80, borderRadius: 15}}/>
             }
-          </Text>
-          <View style={{flexDirection: 'row'}}>
+          </View>
+
+          <View style={{justifyContent: 'space-evenly', marginLeft: 10, paddingBottom: 7, paddingTop: 7}}>
+            <Text style={{ color: '#000', fontWeight: '700', fontSize: 18}}>
+              {
+                (auth.currentUser?.displayName !== null) ? auth.currentUser?.displayName : 'Nuevo Usuario'
+              }
+            </Text>
             <Text style={{ color: '#000', marginRight: 5}}>
               {auth.currentUser?.email}
             </Text>
+        
           </View>
+         </View>
         </ImageBackground>
         <View style={{flex: 1, backgroundColor: '#fff', paddingTop: 10}}>
           <DrawerItemList {...props} />
