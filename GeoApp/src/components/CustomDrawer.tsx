@@ -16,9 +16,11 @@ const CustomDrawer = (props: any) => {
     <View style={{flex: 1}}>
       <DrawerContentScrollView {...props} contentContainerStyle={{backgroundColor: '#f4f4f4'}}>
         <ImageBackground source={require('../img/menuBg.jpg')} style={{padding: 20}}>
-          <Image 
-            source={require('../img/Profile.png')} 
-            style={{height: 80, width: 80, borderRadius: 15, marginBottom: 10}}/>
+          {
+            (auth.currentUser?.photoURL !== null) ? 
+            <Image source={{uri: auth.currentUser?.photoURL}} style={{height: 80, width: 80, borderRadius: 15, marginBottom: 10}}/> :
+            <Image source={require('../img/Profile.png')} style={{height: 80, width: 80, borderRadius: 15, marginBottom: 10}}/>
+          }
           <Text style={{ color: '#000', fontWeight: '700', fontSize: 18, marginBottom: 5}}>
             {
               (auth.currentUser?.displayName !== null) ? auth.currentUser?.displayName : 'Nuevo Usuario'

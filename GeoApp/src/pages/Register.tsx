@@ -146,22 +146,3 @@ const RegisterScreen = ({navigation}: {navigation: Navigation}) => {
 }
 
 export default RegisterScreen;
-
-/*
-
-<View style={{
-            flexDirection: 'row', 
-            alignItems: 'center', 
-            borderBottomColor: '#ccc', 
-            borderBottomWidth: 1, 
-            paddingBottom: 8, 
-            marginBottom: 15
-          }}>
-            <Ionicons name='person-outline' size={20} color='#666'/>
-            <TextInput 
-              placeholder="Nombre de Usuario" 
-              style={{marginLeft: 10, flex: 1, paddingVertical: 0}}
-            />
-          </View>
-
-*/

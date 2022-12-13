@@ -18,9 +18,9 @@ const DrawerStack = () => {
       drawerContent={props => <CustomDrawer {...props} />}
       screenOptions={{
         headerShown: true, //false para esconder barra superior
-        drawerActiveBackgroundColor: '#E3E3E3',
+        drawerActiveBackgroundColor: '#CCE0B9',
         drawerActiveTintColor: '#000',
-        drawerInactiveTintColor: '#333',
+        drawerInactiveTintColor: '#555',
         drawerLabelStyle: {
           marginLeft: -25,
           fontSize: 15,
@@ -36,11 +36,11 @@ const DrawerStack = () => {
         }}
       />
       <Drawer.Screen
-        name="Mi Perfil"
+        name="Editar Perfil"
         component={Profile}
         options={{
           drawerIcon: ({color}) => (
-            <Ionicons name="person-outline" size={22} color={color} />
+            <Ionicons name="settings-outline" size={22} color={color} />
           ),
         }}
       />
