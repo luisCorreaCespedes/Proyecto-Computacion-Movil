@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 import { SafeAreaView, StyleSheet, Text, TextInput, View, Image, TouchableOpacity, ScrollView, Alert, BackHandler, ImageBackground} from "react-native";
 import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
-import { getAuth, signInAnonymously, updateProfile, updateEmail } from "firebase/auth";
+import { getAuth, signInAnonymously, updateProfile, updateEmail, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigation } from "@react-navigation/native";
 
 interface Navigation {
@@ -16,19 +16,6 @@ const Profile = ({navigation}: {navigation: Navigation}) => {
 
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
-
-
-  const userUpdate = async () => {
-
-    // You need to pass the authentication instance as param
-    let { user } = await signInAnonymously(auth)
-
-    // Passing user's object as first param and updating it
-    await updateProfile(user, {
-        'displayName': userName
-    })
-    await updateEmail(user, userEmail)
-}
 
   return (
     <SafeAreaView style={{flex: 1, justifyContent: 'center', backgroundColor: '#fff'}}>
@@ -83,8 +70,7 @@ const Profile = ({navigation}: {navigation: Navigation}) => {
               placeholder='Tu nuevo Correo Electrónico...' 
               style={{marginLeft: 10, flex: 1, paddingVertical: 0}}
               keyboardType='email-address'
-              value={userEmail}
-              onChangeText={text => setUserEmail(text)}
+              
             />
           </View>
           <View style={{
@@ -104,7 +90,7 @@ const Profile = ({navigation}: {navigation: Navigation}) => {
 
           <View style={{alignItems: 'center'}}>
             <TouchableOpacity 
-              onPress={userUpdate}
+              onPress={() => {}}
               style={{
                 backgroundColor: '#7CBE7C',
                 padding: 8,

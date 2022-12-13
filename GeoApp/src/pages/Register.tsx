@@ -13,6 +13,7 @@ const RegisterScreen = ({navigation}: {navigation: Navigation}) => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [userName, setUserName] = useState('');
 
   useEffect(() => {
     BackHandler.addEventListener('hardwareBackPress', backPressed);
@@ -33,10 +34,14 @@ const RegisterScreen = ({navigation}: {navigation: Navigation}) => {
   const handleRegister = () => {
     auth
       .createUserWithEmailAndPassword(email, password)
-      .then(userCredentials => {
+      .then((userCredentials) => {
+        if(userCredentials.user){
+          userCredentials.user.updateProfile({
+            displayName: userName
+          })
         Alert.alert('Registro', 'Registrado correctamente', 
         [{text: 'Vale', onPress: () => navigation.navigate('Mapa')}])
-      })
+      }})
       .catch(error => 
         Alert.alert('Registro', 'Los datos ingresados no son válidos. Intente nuevamente.', [{text: 'Volver'}])
         )
@@ -63,6 +68,23 @@ const RegisterScreen = ({navigation}: {navigation: Navigation}) => {
             </Text>
           </View>
           
+          <View style={{
+            flexDirection: 'row', 
+            alignItems: 'center', 
+            borderBottomColor: '#ccc', 
+            borderBottomWidth: 1, 
+            paddingBottom: 8, 
+            marginBottom: 15
+          }}>
+            <MaterialIcons name='person-outline' size={20} color='#666'/>
+            <TextInput 
+              placeholder="Nombre de Usuario" 
+              style={{marginLeft: 10, flex: 1, paddingVertical: 0}}
+              value={userName}
+              onChangeText={text => setUserName(text)}
+            />
+          </View>
+
           <View style={{
             flexDirection: 'row', 
             alignItems: 'center', 
