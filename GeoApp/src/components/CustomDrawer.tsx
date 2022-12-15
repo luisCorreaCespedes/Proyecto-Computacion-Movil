@@ -17,22 +17,19 @@ const CustomDrawer = (props: any) => {
       <DrawerContentScrollView {...props} contentContainerStyle={{backgroundColor: '#f4f4f4'}}>
         <ImageBackground source={require('../img/menuBg.jpg')} style={{padding: 20}}>
 
-         <View style={{flexDirection: 'row'}}>
-          <View>
+         <View>
             {
               (auth.currentUser?.photoURL !== null) ? 
-              <Image source={{uri: auth.currentUser?.photoURL}} style={{height: 80, width: 80, borderRadius: 15}}/> :
-              <Image source={require('../img/Profile1.png')} style={{height: 80, width: 80, borderRadius: 15}}/>
+              <Image source={{uri: auth.currentUser?.photoURL}} style={{height: 90, width: 90, borderRadius: 15}}/> :
+              <Image source={require('../img/Profile1.png')} style={{height: 90, width: 90, borderRadius: 15}}/>
             }
-          </View>
-
-          <View style={{justifyContent: 'space-evenly', marginLeft: 10, paddingBottom: 7, paddingTop: 7}}>
-            <Text style={{ color: '#000', fontWeight: '700', fontSize: 18}}>
+          <View style={{justifyContent: 'space-evenly', marginLeft: 10, paddingBottom: 7, paddingTop: 12}}>
+            <Text style={{ color: '#000', fontWeight: '700', fontSize: 17}}>
               {
                 (auth.currentUser?.displayName !== null) ? auth.currentUser?.displayName : 'Nuevo Usuario'
               }
             </Text>
-            <Text style={{ color: '#000', marginRight: 5}}>
+            <Text style={{ color: '#000', marginRight: 5, fontSize: 13}}>
               {auth.currentUser?.email}
             </Text>
         

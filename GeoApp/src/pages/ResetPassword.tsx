@@ -5,7 +5,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { auth } from "../../firebaseAuth";
 import { LoadingOverlay } from '../components/LoadingScreen';
-import { sendEmailVerification } from "firebase/auth";
+import { sendPasswordResetEmail } from "firebase/auth";
 
 interface Navigation {
   navigate(destination: string): void;
@@ -13,11 +13,9 @@ interface Navigation {
 
 let val = false;
 
-const LoginScreen = ({navigation}: {navigation: Navigation}) => {
+const ResetPasswordScreen = ({navigation}: {navigation: Navigation}) => {
 
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     BackHandler.addEventListener('hardwareBackPress', backPressed);
@@ -35,28 +33,25 @@ const LoginScreen = ({navigation}: {navigation: Navigation}) => {
       return val = true;
   }
 
-  const handleLogin = () => {
-    setLoading(true)
-    auth
-      .signInWithEmailAndPassword(email, password)
-      .then(userCredentials => {
-        navigation.navigate('Mapa');
+  const resetPass = () => {
+      sendPasswordResetEmail(auth, email)
+      .then(() => {
+        Alert.alert('Reestablecer Contraseña', 'Se ha enviado un link a tu Correo asociado para Reestablecer la Contraseña.', [{text: 'Ok'}])
       })
-      .catch(error => 
-        Alert.alert('Inicio de Sesión', 'Las credenciales no son válidas. Intenta nuevamente.', [{text: 'Volver'}])
-        )
-      .finally(() => setLoading(false));  
+      .catch((error) => {
+        Alert.alert('Reestablecer Contraseña', 'El correo ingresado no es válido. Intenta nuevamente.', [{text: 'Ok'}])
+      });
   }
+
 
   return (
     <SafeAreaView style={{flex: 1, justifyContent: 'center', backgroundColor: '#fff'}}>
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={{paddingTop: 80}}>
-        <LoadingOverlay loading={loading}></LoadingOverlay>
         <View style={{paddingHorizontal: 25}}>
-          <View style={{alignItems: 'center', paddingBottom: 20}}>
-            <Image source={require('../img/Login.png')} style={{height: 240, width: 240}}/>
+          <View style={{alignItems: 'center', paddingBottom: 5}}>
+            <Image source={require('../img/ResetPass.png')} style={{height: 270, width: 240}}/>
           </View>
           
           <View style={{alignItems: 'center'}}>
@@ -66,10 +61,16 @@ const LoginScreen = ({navigation}: {navigation: Navigation}) => {
               color: '#333', 
               marginBottom: 25
             }}>
-              Iniciar Sesión
+              Reestablecer Contraseña
             </Text>
           </View>
           
+          <View style={{paddingBottom: 30}}>
+            <Text style={{fontStyle: 'italic'}}>
+                Te enviaremos un link al correo asociado a tu cuenta para que puedas cambiar tu contraseña.
+            </Text>
+          </View>
+
           <View style={{
             flexDirection: 'row', 
             alignItems: 'center', 
@@ -80,7 +81,7 @@ const LoginScreen = ({navigation}: {navigation: Navigation}) => {
           }}>
             <MaterialIcons name='alternate-email' size={20} color='#666'/>
             <TextInput 
-              placeholder="Correo electrónico" 
+              placeholder="Ingresa tu Correo electrónico" 
               style={{marginLeft: 10, flex: 1, paddingVertical: 0}} 
               keyboardType='email-address'
               value={email}
@@ -88,30 +89,9 @@ const LoginScreen = ({navigation}: {navigation: Navigation}) => {
             />
           </View>
 
-          <View style={{
-            flexDirection: 'row', 
-            alignItems: 'center', 
-            borderBottomColor: '#ccc', 
-            borderBottomWidth: 1, 
-            paddingBottom: 8, 
-            marginBottom: 15
-          }}>
-            <Ionicons name='ios-lock-closed-outline' size={20} color='#666'/>
-            <TextInput 
-              placeholder="Contraseña" 
-              style={{marginLeft: 10, flex: 1, paddingVertical: 0}} 
-              secureTextEntry={true}
-              value={password}
-              onChangeText={text => setPassword(text)}
-              />
-            <TouchableOpacity onPress={() => {navigation.navigate('Reestablecer')}}>
-              <Text style={{color: '#7CBE7C', fontWeight: '700'}}>Reestablecer</Text>
-            </TouchableOpacity>
-          </View>
-
           <View style={{alignItems: 'center'}}>
             <TouchableOpacity 
-              onPress={handleLogin}
+              onPress={resetPass}
               style={{
                 backgroundColor: '#7CBE7C',
                 padding: 8,
@@ -127,7 +107,7 @@ const LoginScreen = ({navigation}: {navigation: Navigation}) => {
                   fontSize: 14,
                   color: '#fff'
                 }}>
-                  Ingresar
+                  Reestablecer
                 </Text>
             </TouchableOpacity>
           </View>
@@ -137,14 +117,14 @@ const LoginScreen = ({navigation}: {navigation: Navigation}) => {
             justifyContent: 'center',
             marginTop: 10
           }}>
-            <Text>¿No tienes una cuenta? </Text>
-            <TouchableOpacity onPress={() => {navigation.navigate('Registro')}}>
+            <Text>¿Recordaste tu contraseña? </Text>
+            <TouchableOpacity onPress={() => {navigation.navigate('Ingreso')}}>
               <Text style={{
                 fontWeight: '700',
                 fontSize: 14,
                 color: '#4A7F4A'
               }}>
-                Registrate
+                Inicia Sesión
               </Text>
             </TouchableOpacity>
           </View>
@@ -155,4 +135,4 @@ const LoginScreen = ({navigation}: {navigation: Navigation}) => {
   )
 }
 
-export default LoginScreen;
+export default ResetPasswordScreen;

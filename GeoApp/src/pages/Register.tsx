@@ -4,6 +4,7 @@ import { SafeAreaView, Text, TextInput, View, Image, TouchableOpacity, ScrollVie
 import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { auth } from "../../firebaseAuth";
+import { LoadingOverlay } from '../components/LoadingScreen';
 
 interface Navigation {
   navigate(destination: string): void;
@@ -14,6 +15,7 @@ const RegisterScreen = ({navigation}: {navigation: Navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [userName, setUserName] = useState('');
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     BackHandler.addEventListener('hardwareBackPress', backPressed);
@@ -32,6 +34,7 @@ const RegisterScreen = ({navigation}: {navigation: Navigation}) => {
   }
 
   const handleRegister = () => {
+    setLoading(true)
     auth
       .createUserWithEmailAndPassword(email, password)
       .then((userCredentials) => {
@@ -45,6 +48,7 @@ const RegisterScreen = ({navigation}: {navigation: Navigation}) => {
       .catch(error => 
         Alert.alert('Registro', 'Los datos ingresados no son válidos. Intente nuevamente.', [{text: 'Volver'}])
         )
+        .finally(() => setLoading(false));
   }
 
   return (
@@ -52,6 +56,7 @@ const RegisterScreen = ({navigation}: {navigation: Navigation}) => {
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={{paddingTop: 80}}>
+        <LoadingOverlay loading={loading}></LoadingOverlay>
         <View style={{paddingHorizontal: 25}}>
           <View style={{alignItems: 'center', paddingBottom: 20}}>
             <Image source={require('../img/Register.png')} style={{height: 240, width: 240}}/>
