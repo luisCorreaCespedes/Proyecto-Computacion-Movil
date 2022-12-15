@@ -1,7 +1,7 @@
 /*Imports*/
 import React from 'react';
 import { View, Text, ImageBackground, Image, TouchableOpacity } from 'react-native';
-import { DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
+import { DrawerContentScrollView, DrawerItem, DrawerItemList } from '@react-navigation/drawer';
 import { useNavigation } from '@react-navigation/native';
 import { getAuth } from "firebase/auth";
 import { Ionicons } from '@expo/vector-icons';

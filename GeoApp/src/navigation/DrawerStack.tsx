@@ -1,6 +1,6 @@
 /*Imports*/
 import React from 'react';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createDrawerNavigator, DrawerItem } from '@react-navigation/drawer';
 import CustomDrawer from '../components/CustomDrawer';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -8,6 +8,7 @@ import { Ionicons } from '@expo/vector-icons';
 import  Home  from '../pages/Home';
 import  Profile  from '../pages/Profile';
 import  About from '../pages/About';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 /*Pages Stack*/
 const Drawer = createDrawerNavigator();
@@ -18,6 +19,11 @@ const DrawerStack = () => {
       drawerContent={props => <CustomDrawer {...props} />}
       screenOptions={{
         headerShown: true, //false para esconder barra superior
+        headerRight: () => (
+          <TouchableOpacity style={{marginRight: 8}} onPress={() => {}}>
+                <Ionicons name="add-outline" size={30} color='#555'/>
+          </TouchableOpacity>
+        ), // AGREGAR EN EL ONPRESS LA FUNCIÓN DEL BOTÓN +
         drawerActiveBackgroundColor: '#CCE0B9',
         drawerActiveTintColor: '#000',
         drawerInactiveTintColor: '#555',
