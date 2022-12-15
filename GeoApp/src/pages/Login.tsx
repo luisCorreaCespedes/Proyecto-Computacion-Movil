@@ -4,6 +4,7 @@ import { SafeAreaView, ScrollView, Text, TextInput, View, Image, TouchableOpacit
 import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { auth } from "../../firebaseAuth";
+import { LoadingOverlay } from '../components/LoadingScreen';
 
 interface Navigation {
   navigate(destination: string): void;
@@ -15,6 +16,7 @@ const LoginScreen = ({navigation}: {navigation: Navigation}) => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     BackHandler.addEventListener('hardwareBackPress', backPressed);
@@ -33,6 +35,7 @@ const LoginScreen = ({navigation}: {navigation: Navigation}) => {
   }
 
   const handleLogin = () => {
+    setLoading(true)
     auth
       .signInWithEmailAndPassword(email, password)
       .then(userCredentials => {
@@ -41,6 +44,7 @@ const LoginScreen = ({navigation}: {navigation: Navigation}) => {
       .catch(error => 
         Alert.alert('Inicio de Sesión', 'Las credenciales no son válidas. Intenta nuevamente.', [{text: 'Volver'}])
         )
+      .finally(() => setLoading(false));  
   }
   
   return (
@@ -48,6 +52,7 @@ const LoginScreen = ({navigation}: {navigation: Navigation}) => {
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={{paddingTop: 80}}>
+        <LoadingOverlay loading={loading}></LoadingOverlay>
         <View style={{paddingHorizontal: 25}}>
           <View style={{alignItems: 'center', paddingBottom: 20}}>
             <Image source={require('../img/Login.png')} style={{height: 240, width: 240}}/>
