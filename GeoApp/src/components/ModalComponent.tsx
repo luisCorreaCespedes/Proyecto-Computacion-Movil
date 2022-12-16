@@ -37,7 +37,9 @@ const ModalApp = ({ visible }: Props) => {
                         />
                         <Pressable
                             style={[styles.button, styles.submitButton]}
-                            onPress={() => {writeMarkerData(selected)}}
+                            onPress={() => {writeMarkerData(selected),
+                                Alert.alert('Localización', 'Coordenadas guardadas', [{ text: 'Aceptar' }])
+                            }}
                         >
                             <Text style={styles.textStyle}>Guardar</Text>
                         </Pressable>
