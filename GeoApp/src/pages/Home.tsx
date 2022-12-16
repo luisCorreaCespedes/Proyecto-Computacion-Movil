@@ -36,19 +36,21 @@ const Home = () => {
   }
 
   const printInformation = () => {
-    return(
-    Object.values(information).map((e: any, index:any) => {
-       // console.log(information)
-       return(
-        <Marker 
-          coordinate={{latitude: e.latitude, longitude: e.longitude}}
-          title={e.fuente}
-          key = {index}
-          >
-        </Marker>
-       ) 
-    })
-    )
+    if(information){
+      return(
+        Object.values(information).map((e: any, index:any) => {
+          // console.log(information)
+          return(
+            <Marker 
+              coordinate={{latitude: e.latitude, longitude: e.longitude}}
+              title={e.fuente}
+              key = {index}
+              >
+            </Marker>
+          ) 
+        })
+      )
+    }
   }
   return (
     <>

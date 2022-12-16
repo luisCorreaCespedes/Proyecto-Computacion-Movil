@@ -37,7 +37,7 @@ const ModalApp = ({ visible }: Props) => {
                         />
                         <Pressable
                             style={[styles.button, styles.submitButton]}
-                            onPress={() => {writeMarkerData(selected),
+                            onPress={() => {writeMarkerData(selected), setModalVisible(!modalVisible),
                                 Alert.alert('Localización', 'Coordenadas guardadas', [{ text: 'Aceptar' }])
                             }}
                         >
