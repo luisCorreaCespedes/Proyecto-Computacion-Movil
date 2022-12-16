@@ -9,6 +9,9 @@ import  Home  from '../pages/Home';
 import  Profile  from '../pages/Profile';
 import  About from '../pages/About';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { readMarkerData, writeMarkerData } from '../firebase/database'
+import ModalPicker from '../components/ModalComponent';
+
 
 /*Pages Stack*/
 const Drawer = createDrawerNavigator();
@@ -20,7 +23,7 @@ const DrawerStack = () => {
       screenOptions={{
         headerShown: true, //false para esconder barra superior
         headerRight: () => (
-          <TouchableOpacity style={{marginRight: 8}} onPress={() => {}}>
+          <TouchableOpacity style={{marginRight: 8}} onPress={() => {readMarkerData()}}>
                 <Ionicons name="add-outline" size={30} color='#555'/>
           </TouchableOpacity>
         ), // AGREGAR EN EL ONPRESS LA FUNCIÓN DEL BOTÓN +

@@ -3,6 +3,7 @@ import * as React from "react";
 import * as Location from 'expo-location'
 import { Text, StyleSheet, View} from "react-native";
 import MapView, {Marker} from "react-native-maps";
+import { database } from "../../firebaseAuth";
 
 const Home = () => {
 
