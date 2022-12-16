@@ -4,6 +4,8 @@ import { SafeAreaView, StyleSheet, Text, TextInput, View, Image, TouchableOpacit
 import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { auth } from "../../firebaseAuth";
+import { sendEmailVerification } from 'firebase/auth';
+
 
 interface Navigation {
   navigate(destination: string): void;
@@ -13,7 +15,8 @@ const Profile = ({navigation}: {navigation: Navigation}) => {
 
   const [userName, setUserName] = useState('');
   const [refreshPage, setRefreshPage] = useState('');
-  
+  const [email, setEmail] = useState('');
+
   const user = auth.currentUser;
   let avatar: any;
 
@@ -39,6 +42,16 @@ const Profile = ({navigation}: {navigation: Navigation}) => {
     } else {
       Alert.alert('Editar Perfil', 'El campo está vacio. Ingresa un Nombre de Usuario.', [{text: 'Ok'}])
     }
+  }
+
+  const emailValidation = () => {
+    user?.sendEmailVerification()
+    .then(() =>{
+      Alert.alert('Verificar email', 'Se ha mandado un email al usuario actual', [{text: 'Aceptar'}])
+    }).catch((error) => {
+      Alert.alert('Verificar email', 'El email no recibe correitos ):', [{text: 'Ok'}])
+      console.log(error.message);
+    });
   }
 
   return (
@@ -155,6 +168,37 @@ const Profile = ({navigation}: {navigation: Navigation}) => {
                 Actualizar Nombre
               </Text>
             </TouchableOpacity>
+          </View>
+
+          <View style={{alignItems: 'center'}}>
+              {
+                (auth.currentUser?.emailVerified == false) ?
+                <TouchableOpacity 
+                onPress={emailValidation}
+                style={{
+                  backgroundColor: '#7CBE7C',
+                  padding: 8,
+                  borderRadius: 15,
+                  marginTop: 5,
+                  marginBottom: 20,
+                  width: 150
+                }}>
+                <Text style={{
+                  textAlign: 'center',
+                  fontWeight: '700',
+                  fontSize: 14,
+                  color: '#fff'
+                }}>
+                  Verificar email
+                </Text>
+              </TouchableOpacity> :
+              <Text style={{
+               fontStyle: 'italic' 
+              }}>
+                Email verificado
+              </Text>
+
+              }
           </View>
 
         </View>
