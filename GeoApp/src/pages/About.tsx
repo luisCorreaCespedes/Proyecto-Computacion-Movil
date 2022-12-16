@@ -93,7 +93,7 @@ const About = () => {
                   paddingBottom: 5,
                 }}>
                   Integrantes: Alexis Abarca Arias ; Francisco Díaz Hernández ; Luis Correa Céspedes ;
-                  Rodrigo Aguirre Rodriguez y necesitamos un 5.8 :c
+                  Rodrigo Aguirre Rodriguez
                 </Text>
               </View>
             }]}
