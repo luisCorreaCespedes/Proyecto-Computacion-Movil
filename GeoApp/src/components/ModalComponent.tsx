@@ -37,7 +37,7 @@ const ModalApp = ({ visible }: Props) => {
                         />
                         <Pressable
                             style={[styles.button, styles.submitButton]}
-                            onPress={() => {writeMarkerData(selected)}}
+                            onPress={() => {writeMarkerData(selected),setModalVisible(!modalVisible)}}
                         >
                             <Text style={styles.textStyle}>Guardar</Text>
                         </Pressable>

@@ -26,10 +26,12 @@ const writeMarkerData= async (texto: String) => {
     }
 
 const readMarkerData = () =>{
+    let information
     onValue (refMarker, (snapshot) =>{
         const data = snapshot.val();
-        console.log(data)
+        information = data
     })
+    return information
 }
 
 export {writeMarkerData, readMarkerData};
