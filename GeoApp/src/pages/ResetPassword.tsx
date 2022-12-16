@@ -2,9 +2,7 @@
 import React, {useEffect, useState} from "react";
 import { SafeAreaView, ScrollView, Text, TextInput, View, Image, TouchableOpacity, Alert, BackHandler} from "react-native";
 import { MaterialIcons } from '@expo/vector-icons';
-import { Ionicons } from '@expo/vector-icons';
 import { auth } from "../../firebaseAuth";
-import { LoadingOverlay } from '../components/LoadingScreen';
 import { sendPasswordResetEmail } from "firebase/auth";
 
 interface Navigation {
@@ -16,7 +14,7 @@ let val = false;
 const ResetPasswordScreen = ({navigation}: {navigation: Navigation}) => {
 
   const [email, setEmail] = useState('');
-
+  
   useEffect(() => {
     BackHandler.addEventListener('hardwareBackPress', backPressed);
   }, []);

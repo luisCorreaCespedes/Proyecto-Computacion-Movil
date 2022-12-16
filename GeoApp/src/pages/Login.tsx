@@ -5,7 +5,6 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { auth } from "../../firebaseAuth";
 import { LoadingOverlay } from '../components/LoadingScreen';
-import { sendEmailVerification } from "firebase/auth";
 
 interface Navigation {
   navigate(destination: string): void;

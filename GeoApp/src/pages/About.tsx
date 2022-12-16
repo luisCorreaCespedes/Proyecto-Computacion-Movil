@@ -1,22 +1,24 @@
-/*Other View*/
-import { useEffect } from "react";
-import { Text, StyleSheet, View, BackHandler } from "react-native";
+import * as React from "react";
+import Accordion from 'react-native-accordion-wrapper';
+import { View, Text } from 'react-native';
 
-const About = () => {
-  return (
-    <View style={styles.container}>
-      <Text>Vista de prueba para agregar otra cosa... creo</Text>
-    </View>
-  );
+  const About = () => {
+
+    return (
+      <Accordion
+        shouldSelectOneItemAtATime
+        headerItemsStyle={{
+          backgroundColor: '#dedede',
+          borderBottomColor: '#000000',
+        }}
+        dataSource={[{
+            title: 'first title',
+            child: <View><Text>This is the child view</Text></View>
+        }, {
+            title: 'second title',
+            child: <View><Text>This is the child view</Text></View>
+        }]}/>
+    );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-});
-
-export default About;
+export default About
