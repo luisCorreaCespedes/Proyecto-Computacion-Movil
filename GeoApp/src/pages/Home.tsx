@@ -4,6 +4,7 @@ import * as Location from 'expo-location'
 import { Text, StyleSheet, View} from "react-native";
 import MapView, {Marker} from "react-native-maps";
 import { database } from "../../firebaseAuth";
+import ModalApp from "../components/ModalComponent";
 
 const Home = () => {
 
@@ -30,6 +31,10 @@ async function getLocationPermission(){
   setOrigin(current)
 }
 
+const sendInformation = () =>{
+  
+}
+
   return (
     <View style={styles.container}>
       <MapView 
@@ -44,8 +49,8 @@ async function getLocationPermission(){
           longitudeDelta: 0.04,
         }}
       >
-        
       </MapView>
+      <ModalApp visible={false}/>
     </View>
   );
 }
