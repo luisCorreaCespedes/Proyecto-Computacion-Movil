@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
+import {getDatabase} from "firebase/database";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -11,7 +12,8 @@ const firebaseConfig = {
   projectId: "geoalertdata",
   storageBucket: "geoalertdata.appspot.com",
   messagingSenderId: "967198115211",
-  appId: "1:967198115211:web:4cb42a495a5c62b5359b8e"
+  appId: "1:967198115211:web:4cb42a495a5c62b5359b8e",
+  databaseURL: "https://geoalertdata-default-rtdb.firebaseio.com/"
 };
 
 // Initialize Firebase
@@ -24,5 +26,6 @@ if (firebase.apps.length === 0) {
 }
 
 const auth = firebase.auth();
+const database = getDatabase(app)
 
-export {auth};
+export {auth, database};
